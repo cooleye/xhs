@@ -23,7 +23,7 @@ define(['text!./hf.html','lazyload','css!./hf.css'],function(html,lazyload){
                setTimeout(function(){
                  $("img.lazy").lazyload({
                    effect : "fadeIn",
-                   event : "scroll",
+                  //  event : "scroll",
                    failurelimit : 20 // 图片排序混乱时
                  });
                },20)
@@ -47,13 +47,17 @@ define(['text!./hf.html','lazyload','css!./hf.css'],function(html,lazyload){
         var that = this;
         $(window).on('scroll',function(){
 
+      
           if(location.hash == '#/life/hf'){
             var scrollTop = $(window).scrollTop() + $(window).height();
+           
             $leftLast =  $('.waterfall-content-left .box').last();
             $rightRast =  $('.waterfall-content-right .box').last();
             var $leftLastScroll = $leftLast.offset().top;
             var $rightLastScroll = $rightRast.offset().top;
 
+            // console.log('scrollTop:' + scrollTop)
+            // console.log('left:' + $leftLastScroll)
             if(scrollTop > $leftLastScroll || scrollTop > $rightLastScroll){
                 that.getItems('/gethf2');
             }

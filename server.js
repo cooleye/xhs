@@ -7,6 +7,10 @@ app.get('/',function(req,res){
    res.sendFile(__dirname + '/index.html')
 })
 
+app.get('/test',function(req,res){
+   res.sendFile(__dirname + '/test/baidu.html')
+})
+
 app.get('/gethf',function(req,res){
     fs.readFile(__dirname + '/public/data/hb.json',function(err,data){
         if(err){

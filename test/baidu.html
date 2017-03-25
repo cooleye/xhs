@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../lib/baiduTemplate.js"></script>
+    <script src="../lib/jquery-1.12.4.min.js"></script>
+</head>
+<body>
+    
+    <div id="content">
+        <ul>
+           
+        </ul>
+    </div>
+
+    <script id="mytemp" type="text/html">
+
+            <!-- ejs   {{}}-->
+            <!--<h1><%=success%></h1>-->
+            <%for(var i = 0;i < notes.length;i++){%>
+                <li>
+                    <img src="<%=notes[i].image%>"/>
+                    <span><%=notes[i].title%></span>
+                </li>
+            <%}%>
+
+    </script>
+
+    <script type="text/javascript">
+
+            console.log(baidu);
+            $.get('http://localhost:3002/gethf',function(res){
+                // console.log(res)
+                var data = res.data;
+                console.log(data)
+                // {notes:[],success:true}
+                var htmls = baidu.template('mytemp',data)
+                // console.log('htmls:' + htmls);
+                $("#content ul").html(htmls)
+            })
+    </script>
+</body>
+</html>
