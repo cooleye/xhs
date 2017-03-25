@@ -41,6 +41,13 @@ define(['Router'],function(Router){
             goods.add(id);
         })
     })
+    .route('#/cart',function(req,next){
+      console.log('cart....')
+        require(['src/pages/cart/cart.js'],function(cart){
+            console.log('------')
+            cart.init();
+        })
+    })
 
     return router;
 })

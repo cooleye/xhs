@@ -28,6 +28,7 @@
 
 .box img{
   width: 100%;
+  background-color: #fff;
 }
 .box .item-title{
   padding: 5px;
@@ -58,6 +59,7 @@
 .avatar img{
     width: 20px;height: 20px;
     border-radius: 20px;
+    background-color: #fff;
 }
 .box .item-auth .name{
   text-align: left;

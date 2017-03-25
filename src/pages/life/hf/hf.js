@@ -7,25 +7,34 @@ define(['text!./hf.html','lazyload','css!./hf.css'],function(html,lazyload){
         $.get(url,function(res){
             if(res.success == true){
                var notes = res.data.notes;
-               var left = [];
-               var right = [];
+               var left_html = [];
+               var right_html = [];
                for(var i = 0; i< notes.length;i++){
-                  if(i %2 == 0){
-                    var p = getItem(notes[i]);
-                    left.push(p);
+                  if(i % 2 == 0){
+                    right_html.push(getItem(notes[i]));
                   }else {
-                    var p = getItem(notes[i]);
-                    right.push(p);
+                    left_html.push(getItem(notes[i]));
                   }
                }
 
-               $('.waterfall-content-left').append(left.join(''));
-               $('.waterfall-content-right').append(right.join(''));
+               $('.waterfall-content-right').append(left_html.join(''));
+               $('.waterfall-content-left').append(right_html.join(''));
 
-               $('.box').on('touchstart',function(e){
+               setTimeout(function(){
+                 $("img.lazy").lazyload({
+                   effect : "fadeIn",
+                   event : "scroll",
+                   failurelimit : 20 // 图片排序混乱时
+
+                 });
+               },20)
+
+               $('.box').on('click',function(e){
                   var id = $(this).data('id')
                   location.href="#/detail/" + id
                })
+
+
 
             }
         })
@@ -34,20 +43,22 @@ define(['text!./hf.html','lazyload','css!./hf.css'],function(html,lazyload){
 
           this.getItems('/gethf');
           this.scrollAppend();
-          $("img.lazy").lazyload({
-            effect : "fadeIn"
-          });
+
+
+
       },
       scrollAppend:function(){
         var that = this;
         $(window).on('scroll',function(){
-          console.log(location.hash);
+
           if(location.hash == '#/life/hf'){
             var scrollTop = $(window).scrollTop() + $(window).height();
-            $last =  $('.waterfall-content-left .box').last();
-            var $lastScroll = $last.offset().top;
+            $leftLast =  $('.waterfall-content-left .box').last();
+            $rightRast =  $('.waterfall-content-right .box').last();
+            var $leftLastScroll = $leftLast.offset().top;
+            var $rightLastScroll = $rightRast.offset().top;
 
-            if(scrollTop > $lastScroll){
+            if(scrollTop > $leftLastScroll || scrollTop > $rightLastScroll){
                 that.getItems('/gethf2');
             }
 
@@ -66,8 +77,8 @@ define(['text!./hf.html','lazyload','css!./hf.css'],function(html,lazyload){
   function getItem(data){
       var item =
           '<div class="box" data-id="'+data.id+'">\
-            <img src="'+data.image+'" />\
-            <div class="item-title"><h5>'+data.related_goods_name+'</h5></div>\
+            <img class="lazy" data-original="'+data.image+'" />\
+            <div class="item-title"><h5>'+data.title+'</h5></div>\
             <div class="item-desc">'+data.desc+'</div>\
             <div class="item-auth">\
               <div class="avatar"><img class="lazy" data-original="'+data.user.image+'" /></div><span class="name">'+data.user.nickname+'</span><span class="likes">'+data.likes+'</span>\

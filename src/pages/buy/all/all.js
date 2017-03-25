@@ -1,15 +1,26 @@
 define(['text!./all.html','lazyload','css!./all.css'],function(html,lazyload){
+
+  var _Goods = null;
   var all = {
-      add:function(){
+      add: function(){
 
         $(".buy-content").html(html)
       },
-      getItems:function(url){
+      setGoodsInfo: function(datas){
+          _Goods = datas;
+          localStorage.goods = JSON.stringify(_Goods);
+      },
+      getGoodsInfo: function(){
+          return _Goods;
+      },
+      getItems: function(url){
 
+        var that = this;
         $.get(url,function(res){
           console.log(res)
             if(res.success == true){
                var datas = res.data;
+               that.setGoodsInfo(datas);
                var left = [];
                var right = [];
                for(var i = 0; i< datas.length;i++){
@@ -26,7 +37,8 @@ define(['text!./all.html','lazyload','css!./all.css'],function(html,lazyload){
                $('.waterfall-content-right').append(right.join(''));
 
                $('.box').on('touchstart',function(e){
-                  var id = $(this).data('id')
+                  var id = $(this).data('id');
+
                   location.href="#/goods/" + id
                })
 
@@ -65,7 +77,7 @@ define(['text!./all.html','lazyload','css!./all.css'],function(html,lazyload){
 
   function getItem(data){
       var item =
-          '<div class="box" data-id="'+data.seller_id+'">\
+          '<div class="box" data-id="'+data.id+'">\
             <img src="'+data.image+'" />\
             <div class="item-title"><h5>'+data.title+'</h5></div>\
             <div class="item-desc">'+data.desc+'</div>\
