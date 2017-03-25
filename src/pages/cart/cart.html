@@ -1,39 +1,15 @@
 <div class="cart-page">
 
     <div class="cart-header">
-      <div class="goods-item-radio"><span class="item-select"></span></div>
-      <div class="cart-header-title"></div>
+      <div class="selectall goods-item-radio">
+          <span class="item-select checkbox-select" data-selected="true"></span>
+    </div>
+      <div class="cart-header-title">小红书福利社</div>
     </div>
     <div id="goods-lists">
         <ul>
 
-          <div class="goods-item" >
-              <div class="goods-item-radio" >
-                    <span class="item-select"></span>
-              </div>
-              <div class="goods-item-img" >
-                  <img src="public/imgs/01.jpg"/>
-              </div>
-              <div class="goods-item-content">
-                  <div class="goods-item-content-part">
-                        helol helol helol helol
-                  </div>
-                  <div class="goods-item-content-part">
-                      <span class="goods-price flex1">100$</span>
-                      <div class="flex1 goods-middle">
-                        <div class="operation-item">
-                          <div class="min-btn flex1">-</div>
-                          <div class="num flex1">5</div>
-                          <div class="add-btn flex1">+</div>
-                        </div>
-                      </div>
-                      <div class="goods-item-del flex1">
-                          <img src="//s.xiaohongshu.com/s/app-user/*/shopping-cart/img/delete-icon.png"/>
-                      </div>
-                  </div>
-              </div>
-
-          </div>
+         
 
         </ul>
     </div>
@@ -45,3 +21,41 @@
         <div class="cart-jsbtn">结算</div>
     </div>
 </div>
+
+<script type="text/html" id="goods-templage">
+
+
+<%for(var i = 0;i < data.length;i++){%>
+
+        <li class="goods-item" >
+              <div class="goods-item-radio single-radio">
+                    <span class="item-select checkbox-select" data-selected="true"></span>
+              </div>
+              <div class="goods-item-img" >
+                  <img src="<%=data[i].image%>"/>
+              </div>
+              <div class="goods-item-content">
+                  <div class="goods-item-content-part">
+                        <%=data[i].title%>
+                  </div>
+                  <div class="goods-item-content-part">
+                      <span class="goods-price flex1"><%=data[i].discount_price%></span>
+                      <div class="flex1 goods-middle">
+                        <div class="operation-item">
+                          <div class="min-btn flex1">-</div>
+                          <div class="num flex1"><%=data[i].number%></div>
+                          <div class="add-btn flex1">+</div>
+                        </div>
+                      </div>
+                      <div class="goods-item-del flex1">
+                          <img src="//s.xiaohongshu.com/s/app-user/*/shopping-cart/img/delete-icon.png"/>
+                      </div>
+                  </div>
+              </div>
+          </li>
+<%}%>
+ 
+
+
+
+</script>

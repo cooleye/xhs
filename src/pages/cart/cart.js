@@ -7,15 +7,65 @@ define(['jquery','text!./cart.html','css!./cart.css'],function($,html){
           this.getCartData();
         },
         getCartData:function(){
-          $.get('http://localhost:3002/getcartdata',function(res){
-              var data = res.data;
-              var htmls = [];
-              for(var i = 0; i < data.length;i++){
-                 htmls.push(templage(data[i]));
-              }
 
-              // $('#goods-lists').html(htmls)
+          var that = this;
+          $.get('http://localhost:3002/getcartdata',function(res){              
+              var htmls = baidu.template('goods-templage',res);
+              $('#goods-lists').html(htmls)
+              that.bindEvent();
           })
+        },
+        bindEvent : function(){
+
+
+                //全选
+                $('.selectall>.item-select').on('click',function(){
+                    if($(this).data('selected') == true){
+                        $(this).removeClass('checkbox-select');
+                        $(this).data('selected',false)
+                        $('.single-radio>.item-select').each(function(a,b){
+                            $(this).removeClass('checkbox-select');
+                            $(this).data('selected',false)
+                        })
+                    }else{
+                        $(this).addClass('checkbox-select');
+                        $(this).data('selected',true)
+                        $('.single-radio>.item-select').each(function(){
+                            $(this).addClass('checkbox-select');
+                            $(this).data('selected',true)
+                        })
+                    }
+
+                })
+
+                //单选
+                $('.single-radio>.item-select').on('click',function(){
+                    if($(this).data('selected') == true){
+                        $(this).removeClass('checkbox-select');
+                        $(this).data('selected',false)
+                        $('.selectall>.item-select').removeClass('checkbox-select');
+                        $('.selectall>.item-select').data('selected',false)
+                    }else{
+                        $(this).addClass('checkbox-select');
+                        $(this).data('selected',true)
+
+                         $('.single-radio>.item-select').each(function(){
+           
+                            if($(this).data('selected') == false){
+                                $('.selectall>.item-select').removeClass('checkbox-select');
+                                $('.selectall>.item-select').data('selected',false)
+                                return false;
+                            }else{
+                                 $('.selectall>.item-select').addClass('checkbox-select');
+                                 $('.selectall>.item-select').data('selected',true)
+                            }
+                        })
+
+                    }
+
+                   
+                    
+                })
         }
       }
 

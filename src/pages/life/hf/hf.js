@@ -25,7 +25,6 @@ define(['text!./hf.html','lazyload','css!./hf.css'],function(html,lazyload){
                    effect : "fadeIn",
                    event : "scroll",
                    failurelimit : 20 // 图片排序混乱时
-
                  });
                },20)
 
@@ -33,9 +32,6 @@ define(['text!./hf.html','lazyload','css!./hf.css'],function(html,lazyload){
                   var id = $(this).data('id')
                   location.href="#/detail/" + id
                })
-
-
-
             }
         })
       },
