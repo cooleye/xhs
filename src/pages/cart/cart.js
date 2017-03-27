@@ -71,13 +71,16 @@ define(['jquery','text!./cart.html','css!./cart.css'],function($,html){
                 })
 
 
+                //点击加号按钮
                 $(".add-btn").on('click',function(){
                     var num = $(this).siblings('.num').text();
                     num = parseInt(num);
                     num++;
                     $(this).siblings('.num').text(num);
                     that.countTotal();
-                })
+                });
+
+                //点击减号按钮
                  $(".min-btn").on('click',function(){
                     var num = $(this).siblings('.num').text();
                     num = parseInt(num);
@@ -87,21 +90,28 @@ define(['jquery','text!./cart.html','css!./cart.css'],function($,html){
                     }
                     $(this).siblings('.num').text(num);
                     that.countTotal();
-                })
+                });
 
+                //点击删减按钮
                 $('.goods-item-del').on('click',function(){
-                   
+                //    console.log('delete');
                    var good =  $(this).parents('.goods-item')
                    var id = good.data('id'); 
                    that.removeItem(id,good);
-                })
+                });
+
+                //点击结算，生成订单
+                $('.cart-jsbtn').on('click',function(){
+                          location.href = '#/order';
+                });
         },
-        removeItem:function(id){
-             $.get('http://localhost:3002/',function(res){
+        removeItem:function(id,good){
+            console.log(id);
+             $.get('http://localhost:3002/removegoods',function(res){
                     if(res.msg == 'success'){
                         $(good).remove();
                     }
-             })
+             });
         },
         countTotal:function(){
             var _totalPrice = 0;
@@ -115,7 +125,7 @@ define(['jquery','text!./cart.html','css!./cart.css'],function($,html){
                 $('.cart-total-num').text(_totalPrice);
             })
         }
-      }
+      };
 
 
 
