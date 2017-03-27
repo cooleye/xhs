@@ -4,7 +4,7 @@ define(['Router'],function(Router){
 
     .route('#/life', function(req, next){
 
-
+        console.log('life')
         require(['src/pages/life/life.js'],function(life){
             life.add();
             life.initMenu();

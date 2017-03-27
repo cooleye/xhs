@@ -16,7 +16,7 @@ require.config({
 
 require(['jquery','src/myroute.js','rem','baidu'],function($,r){
 
-      // location.href = '#/life'
+      location.href = '#/life'
 			// console.log(document.innerWidth)
 
 })

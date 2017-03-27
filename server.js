@@ -105,6 +105,20 @@ app.get('/getcartdata',function(req,res){
     })
 
 })
+
+app.get('/removegoods',function(req,res){
+    var id = req.params.id;
+    fs.readFile(__dirname + '/public/data/cart.json',function(err,data){
+
+        if(err){
+          console.log(err)
+        }else{
+          var json = JSON.parse(data.toString());
+          delete json.cart[id];
+          res.json({msg:'success'})
+        }
+    })
+})
 app.listen('3002',function(){
   console.log('server start...')
 })

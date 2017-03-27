@@ -11,5 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.15.2"
+  },
+  "devDependencies": {
+    "jshint": "^2.9.4"
   }
 }

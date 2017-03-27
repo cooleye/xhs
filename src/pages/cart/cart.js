@@ -1,4 +1,6 @@
 define(['jquery','text!./cart.html','css!./cart.css'],function($,html){
+     
+  
       var cart = {
         init : function(){
           $('#upper-container').html(html)
@@ -17,7 +19,8 @@ define(['jquery','text!./cart.html','css!./cart.css'],function($,html){
         },
         bindEvent : function(){
 
-
+                var that = this;
+                that.countTotal();
                 //全选
                 $('.selectall>.item-select').on('click',function(){
                     if($(this).data('selected') == true){
@@ -66,6 +69,51 @@ define(['jquery','text!./cart.html','css!./cart.css'],function($,html){
                    
                     
                 })
+
+
+                $(".add-btn").on('click',function(){
+                    var num = $(this).siblings('.num').text();
+                    num = parseInt(num);
+                    num++;
+                    $(this).siblings('.num').text(num);
+                    that.countTotal();
+                })
+                 $(".min-btn").on('click',function(){
+                    var num = $(this).siblings('.num').text();
+                    num = parseInt(num);
+                    console.log(num)
+                    if(num >1){
+                        num--;
+                    }
+                    $(this).siblings('.num').text(num);
+                    that.countTotal();
+                })
+
+                $('.goods-item-del').on('click',function(){
+                   
+                   var good =  $(this).parents('.goods-item')
+                   var id = good.data('id'); 
+                   that.removeItem(id,good);
+                })
+        },
+        removeItem:function(id){
+             $.get('http://localhost:3002/',function(res){
+                    if(res.msg == 'success'){
+                        $(good).remove();
+                    }
+             })
+        },
+        countTotal:function(){
+            var _totalPrice = 0;
+            $('.goods-item').each(function(){
+                var price = $(this).find('.goods-price').text();
+                var num = $(this).find('.num').text();
+                price = parseInt(price);
+                num = parseInt(num);
+                var price = num * price;
+                _totalPrice += price;
+                $('.cart-total-num').text(_totalPrice);
+            })
         }
       }
 
