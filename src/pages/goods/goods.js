@@ -9,6 +9,7 @@ define(['text!src/pages/goods/goods.html','css!./goods.css'],function(html){
 
           //添加加入购物车按钮
           $('.cart-add').on('click',function(){
+            console.log('add')
             $('#good-zhezhao').fadeIn(400);
             $('#goods-select-window').show().animate({bottom:'0'},400)
           })
@@ -18,16 +19,32 @@ define(['text!src/pages/goods/goods.html','css!./goods.css'],function(html){
             // localStorage.current_goods_id = id;
             //把当前商品id保存起来；
 
+
             $('#good-zhezhao').fadeOut(400);
             $('#goods-select-window').animate({bottom:'-11rem'},200,function(){
               $(this).hide();
             })
 
-            $.get('http://localhost:3002/addgoods/' +_current_goods_id,function(res){
+            $.ajax({
+              url:'http://localhost:3002/addgoods/'+_current_goods_id,
+              method:'GET',
+              async:true,
+              success:function(res){
                 if(res.msg == 'success'){
-                  console.log('商品添加成功')
+                    console.log('商品添加成功')
                 }
+              }
             })
+            // window.location.reload(true);
+            // $.get('http://localhost:3002/addgoods/' +_current_goods_id,function(res){
+            //     if(res.msg == 'success'){
+            //         console.log('商品添加成功')
+            //     }
+            // },function(err){
+            //   console.log(err)
+            // })
+
+
           })
 
           //添加商品到购物车

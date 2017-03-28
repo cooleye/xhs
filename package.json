@@ -10,7 +10,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.15.2"
+    "body-parser": "^1.17.1",
+    "crypto": "0.0.3",
+    "express": "^4.15.2",
+    "pingpp": "^2.0.10"
   },
   "devDependencies": {
     "jshint": "^2.9.4"

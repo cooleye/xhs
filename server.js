@@ -1,7 +1,29 @@
+var API_KEY = "sk_test_WnbLSCin9Ke5y1iT840uv1S8"
+var APP_ID = "app_GOWrf1GerLi5arP0"
+
+
 var express = require('express');
-var fs =require('fs');
+var fs = require('fs');
+
+var pingpp = require('pingpp')(API_KEY);
+var bodyParser = require('body-parser');
+var createPayment = require('./payment.js');
+
 var app = express();
+
 app.use(express.static('./'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+//跨域
+app.all('*', function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
+    res.header("X-Powered-By",' 3.2.1');
+    // res.header("Content-Type", "application/json;charset=utf-8");
+next();
+});
+
 
 app.get('/',function(req,res){
    res.sendFile(__dirname + '/index.html')
@@ -40,7 +62,7 @@ app.get('/getall',function(req,res){
         }
     });
 });
-
+//
 app.get('/addgoods/:id',function(req,res){
     var id = req.params.id;
     var file = __dirname + '/public/data/cart.json';
@@ -62,7 +84,7 @@ app.get('/addgoods/:id',function(req,res){
               if(err){
                 console.log(err);
               }else {
-                res.json({msg:'success'});
+                // res.json({msg:'success'});
               }
           });
         }
@@ -120,6 +142,50 @@ app.get('/removegoods',function(req,res){
         }
     });
 });
-app.listen('3002',function(){
-  console.log('server start...');
+
+app.get('/success',function(req,res){
+
+     var result = req.query.result;
+     var out_trade_no = req.query.out_trade_no;
+     if(result == 'success'){
+       res.sendFile(__dirname + '/success.html')
+     }else{
+       res.redirect('/fail');
+     }
+
 });
+
+app.get('/cancel',function(req,res){
+     res.sendFile(__dirname + '/fail.html')
+});
+
+
+
+// 支付接口
+app.post('/pay',function(req,res){
+
+    pingpp.setPrivateKeyPath(__dirname + "/your_rsa_private_key.pem");
+
+    var channel = req.body["channel"].toLocaleLowerCase();
+    var amount = req.body["amount"];
+    var open_id = req.body["open_id"];
+    var client_ip = req.ip;
+    if(client_ip.length > 10){
+      client_ip = '127.0.0.1';
+    }
+    createPayment(channel, amount, client_ip, open_id, function(err, charge) {
+        if (charge != null) {
+            console.log('ok')
+            res.json(charge);
+        }else{
+            res.json({error:err.raw});
+        }
+
+    });
+})
+
+
+
+app.listen('3002',function(){
+  console.log('server start....:3002')
+})

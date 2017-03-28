@@ -47,7 +47,7 @@ define(['text!./all.html','lazyload','css!./all.css'],function(html,lazyload){
       },
       initWaterFall:function(l){
 
-          this.getItems('/getall');
+          this.getItems('http://127.0.0.1:3002/getall');
           // this.scrollAppend();
           $("img.lazy").lazyload({
             effect : "fadeIn"
@@ -62,7 +62,7 @@ define(['text!./all.html','lazyload','css!./all.css'],function(html,lazyload){
           var $lastScroll = $last.offset().top;
 
           if(scrollTop > $lastScroll){
-              that.getItems('/getall');
+              that.getItems('http://127.0.0.1:3002/getall');
           }
 
           if($(window).scrollTop() >= 51){

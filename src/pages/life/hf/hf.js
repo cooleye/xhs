@@ -37,7 +37,7 @@ define(['text!./hf.html','lazyload','css!./hf.css'],function(html,lazyload){
       },
       initWaterFall:function(l){
 
-          this.getItems('/gethf');
+          this.getItems('http://127.0.0.1:3002/gethf');
           this.scrollAppend();
 
 
@@ -47,10 +47,10 @@ define(['text!./hf.html','lazyload','css!./hf.css'],function(html,lazyload){
         var that = this;
         $(window).on('scroll',function(){
 
-      
+
           if(location.hash == '#/life/hf'){
             var scrollTop = $(window).scrollTop() + $(window).height();
-           
+
             $leftLast =  $('.waterfall-content-left .box').last();
             $rightRast =  $('.waterfall-content-right .box').last();
             var $leftLastScroll = $leftLast.offset().top;
@@ -59,7 +59,7 @@ define(['text!./hf.html','lazyload','css!./hf.css'],function(html,lazyload){
             // console.log('scrollTop:' + scrollTop)
             // console.log('left:' + $leftLastScroll)
             if(scrollTop > $leftLastScroll || scrollTop > $rightLastScroll){
-                that.getItems('/gethf2');
+                that.getItems('http://127.0.0.1:3002/gethf2');
             }
 
             if($(window).scrollTop() >= 51){

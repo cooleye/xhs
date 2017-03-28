@@ -10,13 +10,13 @@ require.config({
 		Swiper:'lib/swiper-3.3.1.jquery.min',
 		baiduTemplate:'lib/baiduTemplate',
 		lazyload:'lib/jquery.lazyload.min',
-    Router:'lib/router.min'
+    Router:'lib/router.min',
+		pingpp:'lib/pingpp'
 	}
 });
 
 require(['jquery','src/myroute.js','rem','baidu'],function($,r){
-
+		// console.log('main...')
       location.href = '#/life';
-			// console.log(document.innerWidth)
 
 });

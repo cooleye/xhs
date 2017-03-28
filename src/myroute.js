@@ -35,6 +35,7 @@ define(['Router'],function(Router){
         });
     })
     .route('#/goods/:id', function(req, next){
+      console.log('good....')
         var id = req.params.id;
         require(['src/pages/goods/goods.js'],function(goods){
             goods.add(id);
