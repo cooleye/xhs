@@ -4,12 +4,14 @@ define(['text!./all.html','lazyload','css!./all.css'],function(html,lazyload){
   var all = {
       add: function(){
 
-        $(".buy-content").html(html);
+        $(".buy-content").html(html)
+
         this.initWaterFall();
       },
       setGoodsInfo: function(datas){
           _Goods = datas;
-          localStorage.goods = JSON.stringify(_Goods);
+          // localStorage.goods = JSON.stringify(_Goods);
+          localStorage['goods'] = JSON.stringify(_Goods);
       },
       getGoodsInfo: function(){
           return _Goods;
@@ -37,14 +39,11 @@ define(['text!./all.html','lazyload','css!./all.css'],function(html,lazyload){
                $('.waterfall-content-left').append(left.join(''));
                $('.waterfall-content-right').append(right.join(''));
 
-               $('.box').on('click',function(e){
-
+               $('.box').on('touchstart',function(e){
                   var id = $(this).data('id');
-                  console.log(id)
-                  var hideId = $(this).find('.hidden-id').val();
-                  console.log('id:' + hideId);
 
                   location.href="#/goods/" + id
+                          // location.href="#/goods/?id=" + id
                })
 
             }
@@ -83,7 +82,6 @@ define(['text!./all.html','lazyload','css!./all.css'],function(html,lazyload){
   function getItem(data){
       var item =
           '<div class="box" data-id="'+data.id+'">\
-           <input class="hidden-id" hidden  value="'+data.id+'"/>\
             <img src="'+data.image+'" />\
             <div class="item-title"><h5>'+data.title+'</h5></div>\
             <div class="item-desc">'+data.desc+'</div>\

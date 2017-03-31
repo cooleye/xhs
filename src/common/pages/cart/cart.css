@@ -1,0 +1,124 @@
+.cart-page{
+  width: 100;
+  height: 100%;
+  background-color: rgb(245,248,250);
+  overflow:hidden;;
+}
+
+#goods-lists{
+  width: 100;
+  background-color: #fff;
+}
+
+#goods-lists .goods-item{
+  display: -webkit-flex;
+  display: flex;
+  height: 2.6667rem;
+  line-height: 3rem;
+  text-align: center;
+}
+.goods-item-radio{
+  text-align: center;
+  flex: 1;
+}
+.cart-header-title{
+  flex: 6;
+}
+
+.goods-item-radio>input{
+  border-radius: 10px;
+}
+.goods-item .goods-item-img{
+  flex: 2;
+}
+.goods-item .goods-item-img img{
+    height: 2.6667rem;
+}
+.goods-item .goods-item-content{
+  flex: 4;
+}
+
+.cart-footer{
+  position: absolute;
+  bottom: 0;
+  height: 50px;
+  display: flex;
+  line-height: 50px;
+  width: 100%;
+}
+.cart-footer .cart-total{
+  flex: 2;
+  text-align: left;
+  padding-left: 10px;
+  background-color: #fff;
+}
+.cart-footer .cart-jsbtn{
+  flex: 1;
+  text-align: left;
+  padding-left: 10px;
+  background-color: rgb(251,0,51);
+  text-align: center;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.item-select{
+  display: inline-block;
+  width: 0.533rem;
+  height: 0.533rem;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px #ccc;
+}
+.checkbox-select{
+  background-image: url('http://s.xiaohongshu.com/s/app-user/*/shopping-cart/img/item-selected-7163fe7.png');
+  background-position: center center;
+  background-repeat: no-repeat;
+  -webkit-background-size: contain;
+  -moz-background-size: contain;
+  background-size: contain;
+  zoom: 1;
+  z-index: 0;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.cart-header{
+  display: flex;
+  width: 100%;
+  height: 1.2rem;
+  line-height: 1.5rem;
+  background-color: #fff;
+  margin-top: 10px;
+  border-top: 1px solid #fff;
+  border-bottom: solid 1px #eee;
+}
+
+.goods-item-content-part{
+  width: 100%;
+  height: 1.3333rem;
+  line-height: 1.3333rem;
+  display: flex;
+}
+
+.flex1{
+  flex: 1;
+}
+
+.operation-item{
+  display: flex;
+  width: 100%;
+  line-height: 0.53rem;
+  height: 0.53rem;
+  border: solid 1px #aaa;
+  border-radius: 5px;
+  margin-top: 0.3333rem;
+}
+.goods-middle{
+  line-height: 1.333rem;
+}
+
+.goods-item-del img{
+  width: 0.533rem;
+  vertical-align: middle;
+}

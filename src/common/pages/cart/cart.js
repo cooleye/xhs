@@ -1,6 +1,6 @@
 define(['jquery','text!./cart.html','css!./cart.css'],function($,html){
-
-
+     
+  
       var cart = {
         init : function(){
           $('#upper-container').html(html)
@@ -10,17 +10,12 @@ define(['jquery','text!./cart.html','css!./cart.css'],function($,html){
         },
         getCartData:function(){
 
-          //this 指向方法的调用者（执行环境）
           var that = this;
-          $.get('http://localhost:3002/getcartdata',function(res){
+          $.get('http://localhost:3002/getcartdata',function(res){              
               var htmls = baidu.template('goods-templage',res);
               $('#goods-lists').html(htmls)
-              console.log(this);
               that.bindEvent();
-          });
-
-
-          // that.bindEvent();
+          })
         },
         bindEvent : function(){
 
@@ -58,7 +53,7 @@ define(['jquery','text!./cart.html','css!./cart.css'],function($,html){
                         $(this).data('selected',true)
 
                          $('.single-radio>.item-select').each(function(){
-
+           
                             if($(this).data('selected') == false){
                                 $('.selectall>.item-select').removeClass('checkbox-select');
                                 $('.selectall>.item-select').data('selected',false)
@@ -71,8 +66,8 @@ define(['jquery','text!./cart.html','css!./cart.css'],function($,html){
 
                     }
 
-
-
+                   
+                    
                 })
 
 
@@ -99,24 +94,21 @@ define(['jquery','text!./cart.html','css!./cart.css'],function($,html){
 
                 //点击删减按钮
                 $('.goods-item-del').on('click',function(){
-
-                  // console.log(this)
-
+                //    console.log('delete');
                    var good =  $(this).parents('.goods-item')
-                   var id = good.data('id');
+                   var id = good.data('id'); 
                    that.removeItem(id,good);
                 });
 
                 //点击结算，生成订单
                 $('.cart-jsbtn').on('click',function(){
-                      location.href = '#/order';
+                          location.href = '#/order';
                 });
         },
         removeItem:function(id,good){
             console.log(id);
-             $.get('http://localhost:3002/removegoods?id=' + id,function(res){
+             $.get('http://localhost:3002/removegoods',function(res){
                     if(res.msg == 'success'){
-                        // 删除 li
                         $(good).remove();
                     }
              });

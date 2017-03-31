@@ -10,9 +10,10 @@ define(['text!./order.html','pingpp','css!./order.css'],function(html,pingpp){
           return;
       }
 
-      var amount = parseInt($('.total-price').text());
-      amount = parseInt(amount);
-
+      // var amount = parseInt($('#total-price').val());
+      // amount = parseInt(amount);
+      var amount = 100;
+      console.log('amount:' + amount);
       $.post(YOUR_URL,{
           channel: channel,
           amount: amount
@@ -40,7 +41,6 @@ define(['text!./order.html','pingpp','css!./order.css'],function(html,pingpp){
                      var htmls = baidu.template('order-goods-lists',res);
                      console.log(htmls);
                      $('.order-content ul').html(htmls)
-
                 });
             },
             bindEvent : function(){

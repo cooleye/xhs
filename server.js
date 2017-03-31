@@ -53,6 +53,7 @@ app.get('/gethf2',function(req,res){
     });
 });
 
+//获取购物页面所有商品数据
 app.get('/getall',function(req,res){
     fs.readFile(__dirname + '/public/data/all.json',function(err,data){
         if(err){
@@ -62,7 +63,7 @@ app.get('/getall',function(req,res){
         }
     });
 });
-//
+//添加商品
 app.get('/addgoods/:id',function(req,res){
     var id = req.params.id;
     var file = __dirname + '/public/data/cart.json';
@@ -84,7 +85,7 @@ app.get('/addgoods/:id',function(req,res){
               if(err){
                 console.log(err);
               }else {
-                // res.json({msg:'success'});
+                res.json({msg:'success'});
               }
           });
         }
@@ -92,6 +93,7 @@ app.get('/addgoods/:id',function(req,res){
 
 });
 
+//获取购物车数据
 app.get('/getcartdata',function(req,res){
 
     fs.readFile(__dirname + '/public/data/cart.json',function(err,cartdata){
@@ -128,6 +130,7 @@ app.get('/getcartdata',function(req,res){
 
 });
 
+//删除购物车数据
 app.get('/removegoods',function(req,res){
     var id = req.params.id;
     console.log('id:' + id);
@@ -143,6 +146,7 @@ app.get('/removegoods',function(req,res){
     });
 });
 
+//支付成功
 app.get('/success',function(req,res){
 
      var result = req.query.result;
@@ -155,6 +159,7 @@ app.get('/success',function(req,res){
 
 });
 
+//支付失败
 app.get('/cancel',function(req,res){
      res.sendFile(__dirname + '/fail.html')
 });

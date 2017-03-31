@@ -7,7 +7,7 @@ define(['Router'],function(Router){
         require(['src/pages/life/life.js'],function(life){
             life.add();
             life.initMenu();
-            location.href = '#/life/hf'
+            location.href = '#/life/hf';
         });
     })
     .route('#/direction', function(req, next){
