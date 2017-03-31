@@ -1,0 +1,25 @@
+ping++ 支付
+
+1、注册 ping++账号   https://www.pingxx.com/?from=1&desc=ping++
+2、下载 服务端和客户端
+  server：https://github.com/PingPlusPlus/pingpp-nodejs
+  client:https://github.com/PingPlusPlus/pingpp-js
+3、 部署安装服务端
+   npm install pingpp
+4、编写服务器代码
+  1、获取 RSA 公钥和私钥,把私钥 保存在本地，公钥 配置在服务器
+
+  编写 支付接口 参考 server.js
+
+  服务器 pay 接口方法中
+  获取 客户端数据：支付金额，平台，opend_id,ip地址等数据，调用封装的createPayment 方法，在这个方法中
+  调用 ping.charges.create 方法完成支付。
+
+5、客户端
+  post 请求，调用支付接口，发送支付数据，支付的平台，金额等。在回调里调用 pingpp.createPayment ，跳转支付页面。
+
+
+商品购买支付流程：
+-----------------------------------
+|商品添加 --> 购物车 --> 订单 --> 支付|
+-----------------------------------
