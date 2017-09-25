@@ -2,6 +2,7 @@ define(['text!./order.html','pingpp','css!./order.css'],function(html,pingpp){
 
 
 
+  //支付接口地址
   var YOUR_URL = 'http://127.0.0.1:3002/pay';
   function wap_pay(channel) {
 
@@ -10,15 +11,16 @@ define(['text!./order.html','pingpp','css!./order.css'],function(html,pingpp){
           return;
       }
 
+      //获取支付金额
       var amount = parseInt($('.total-price').text());
       amount = parseInt(amount);
 
       $.post(YOUR_URL,{
           channel: channel,
           amount: amount
-      },function(res){
-          console.log(res);
-          pingpp.createPayment(res, function(result, err) {
+      },function(charge){
+          console.log(charge);
+          pingpp.createPayment(charge, function(result, err) {
               console.log(result);
               console.log(err.msg);
               console.log(err.extra);

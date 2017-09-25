@@ -5,7 +5,10 @@ var APP_ID = "app_GOWrf1GerLi5arP0"
 var express = require('express');
 var fs = require('fs');
 
+//第一步：设置 API-Key
 var pingpp = require('pingpp')(API_KEY);
+// var ping = require('pingpp')
+// var pingpp = ping(API_KEY)
 var bodyParser = require('body-parser');
 var createPayment = require('./payment.js');
 
@@ -165,13 +168,17 @@ app.get('/cancel',function(req,res){
 });
 
 
+//get   /abc/123   req.params.id
+// ?id=123&name=ddd   req.query.id
+
 
 // 支付接口
 app.post('/pay',function(req,res){
 
+    //第二步：SDK 验证签名设置
     pingpp.setPrivateKeyPath(__dirname + "/your_rsa_private_key.pem");
 
-    var channel = req.body["channel"].toLocaleLowerCase();
+    var channel = req.body["channel"].toLocaleLowerCase();// 支付平台
     var amount = req.body["amount"];
     var open_id = req.body["open_id"];
     var client_ip = req.ip;
